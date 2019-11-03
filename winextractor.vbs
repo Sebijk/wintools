@@ -36,7 +36,7 @@ if drop.count=0 then
 	if i = 6 then 
 		Set wexsjBatch = Myfiles.OpenTextFile( temp & "\Extract.bat", 2, True)
 		wexsjbatch.Writeline "@echo off"
-		wexsjbatch.Writeline "echo Sebijks Windows-Datei Extrahierer Beta 0.4"
+		wexsjbatch.Writeline "echo " & title
 		wexsjbatch.Writeline "echo (c)2005-2017. Licensed under GPL"
 		wexsjbatch.Writeline "echo http://www.sebijk.com"
 		wexsjbatch.Writeline "echo."
@@ -56,6 +56,10 @@ if drop.count=0 then
 		wexsjbatch.Writeline "if exist " & zielpfad & "\*.oc_ ren " & zielpfad & "\*.oc_ *.ocx"
 		wexsjbatch.Writeline "if exist " & zielpfad & "\*.wa_ ren " & zielpfad & "\*.wa_ *.wav"
 		wexsjbatch.Writeline "if exist " & zielpfad & "\*.in_ ren " & zielpfad & "\*.in_ *.inf"
+		wexsjbatch.Writeline "if exist " & zielpfad & "\*.sy_ ren " & zielpfad & "\*.sy_ *.sys"
+		wexsjbatch.Writeline "if exist " & zielpfad & "\*.co_ ren " & zielpfad & "\*.co_ *.com"
+		wexsjbatch.Writeline "if exist " & zielpfad & "\*.vx_ ren " & zielpfad & "\*.co_ *.vxd"
+		wexsjbatch.Writeline "if exist " & zielpfad & "\*.tx_ ren " & zielpfad & "\*.tx_ *.txt"
 		wexsjbatch.Writeline "pause"
 		wexsjbatch.Close
 		MyShell.Run temp & "\Extract.bat",,true
