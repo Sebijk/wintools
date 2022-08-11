@@ -1,28 +1,27 @@
 ' Skript:	sjuser2konto.js'
-' Anwendung: 	Befördert die Verknüpfung zu Benutzer und Kennwörter'
-'		unter Windows XP und höher in die Systemsteuerung.'
+' Anwendung: 	BefÃ¶rdert die VerknÃ¼pfung zu Benutzer und KennwÃ¶rter'
+'		unter Windows XP und hÃ¶her in die Systemsteuerung.'
 '		Based on pcwTweakcp.js von'
 '		http://www.pcwelt.de'
 'Autor:	Sebijk	(sebijk@web.de)'
-'(c) 2005 - 2017 Home of the Sebijk.com'
+'(c) 2005 - 2022 Home of the Sebijk.com'
 'http://www.sebijk.com'
 'Licensed under the GPL'
 
-//Ein paar allgemeine Objekte, die das Script benötigt:
+//Ein paar allgemeine Objekte, die das Script benÃ¶tigt:
 var oWs = WScript.CreateObject("WScript.Shell");
-var oFs = new ActiveXObject("Scripting.FileSystemObject");
 
 var strwindir = oWs.ExpandEnvironmentStrings("%WINDIR%");
 
-//Versions-Check. Wenn kein XP und höher, dann quit().
+//Versions-Check. Wenn kein XP und hÃ¶her, dann quit().
 
 if (winxpchk() == 0) {
-  oWs.Popup("Dieses Skript läuft nur unter Windows XP und höher. Das Programm wird beendet", 0, "Sebijks Benutzer und Kennwörter", 16);
+  oWs.Popup("Dieses Skript lÃ¤uft nur unter Windows XP und hÃ¶her. Das Programm wird beendet", 0, "Sebijks Benutzer und KennwÃ¶rter", 16);
   WScript.Quit();
 }
 
 
-//Soll das Icon von Benutzer und Kennwörter in der Systemsteuerung entfernt oder erstellt werden?
+//Soll das Icon von Benutzer und KennwÃ¶rter in der Systemsteuerung entfernt oder erstellt werden?
 
 if (KeyExists("HKLM\\SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Explorer\\ControlPanel\\NameSpace\\{CA41B6BE-E945-4DDD-BC0B-977E626DE521}\\") == true) {
   delreg();
@@ -33,15 +32,15 @@ else { writereg(); }
 
 function writereg() {
   try {
-    oWs.RegWrite("HKCR\\CLSID\\{CA41B6BE-E945-4DDD-BC0B-977E626DE521}\\","Benutzer und Kennwörter");
-    oWs.RegWrite("HKCR\\CLSID\\{CA41B6BE-E945-4DDD-BC0B-977E626DE521}\\InfoTip","Verwaltet Benutzer und Kennwörter für diesen Computer.");
+    oWs.RegWrite("HKCR\\CLSID\\{CA41B6BE-E945-4DDD-BC0B-977E626DE521}\\","Benutzer und KennwÃ¶rter");
+    oWs.RegWrite("HKCR\\CLSID\\{CA41B6BE-E945-4DDD-BC0B-977E626DE521}\\InfoTip","Verwaltet Benutzer und KennwÃ¶rter fÃ¼r diesen Computer.");
     oWs.RegWrite("HKCR\\CLSID\\{CA41B6BE-E945-4DDD-BC0B-977E626DE521}\\DefaultIcon\\","%SystemRoot%\\System32\\shell32.dll,-220", "REG_EXPAND_SZ");
     oWs.RegWrite("HKCR\\CLSID\\{CA41B6BE-E945-4DDD-BC0B-977E626DE521}\\Shell\\Open\\Command\\", "control.exe userpasswords2");
     oWs.RegWrite("HKCR\\CLSID\\{CA41B6BE-E945-4DDD-BC0B-977E626DE521}\\ShellFolder\\Attributes", 48, "REG_DWORD");
-    oWs.RegWrite("HKLM\\SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Explorer\\ControlPanel\\NameSpace\\{CA41B6BE-E945-4DDD-BC0B-977E626DE521}\\", "Benutzer und Kennwörter");
+    oWs.RegWrite("HKLM\\SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Explorer\\ControlPanel\\NameSpace\\{CA41B6BE-E945-4DDD-BC0B-977E626DE521}\\", "Benutzer und KennwÃ¶rter");
   }
-  catch(error) { oWs.Popup("Kein Schreibzugriff auf die Registry möglich. Sie müssen als Administrator angemeldet sein.", 0, "Sebijks Benutzer und Kennwörter", 16); WScript.Quit(); }
-  oWs.Popup("Benutzer und Kennwörter ist jetzt über die Systemsteuerung verfügbar. Sie müssen sich dazu aber erneut am System anmelden.", 0, "Sebijks Benutzer und Kennwörter", 64);
+  catch(error) { oWs.Popup("Kein Schreibzugriff auf die Registry mÃ¶glich. Sie mÃ¼ssen als Administrator angemeldet sein.", 0, "Sebijks Benutzer und KennwÃ¶rter", 16); WScript.Quit(); }
+  oWs.Popup("Benutzer und KennwÃ¶rter ist jetzt Ã¼ber die Systemsteuerung verfÃ¼gbar. Sie mÃ¼ssen sich dazu aber erneut am System anmelden.", 0, "Sebijks Benutzer und KennwÃ¶rter", 64);
 }
 
 function delreg() {
@@ -54,8 +53,8 @@ function delreg() {
     oWs.RegDelete("HKCR\\CLSID\\{CA41B6BE-E945-4DDD-BC0B-977E626DE521}\\DefaultIcon\\");
     oWs.RegDelete("HKCR\\CLSID\\{CA41B6BE-E945-4DDD-BC0B-977E626DE521}\\");
   }
-  catch(error) { oWs.Popup("Kein Schreibzugriff auf die Registry möglich. Sie müssen als Administrator angemeldet sein.", 0, "Sebijks Benutzer und Kennwörter", 16); WScript.Quit(); }
-  oWs.Popup("Das Symbol von Benutzer und Kennwörter ist aus der Systemsteuerung entfernt. Die Änderung tritt aber erst nach der nächsten Anmeldung in Kraft.", 0, "Sebijks Benutzer und Kennwörter", 64);
+  catch(error) { oWs.Popup("Kein Schreibzugriff auf die Registry mÃ¶glich. Sie mÃ¼ssen als Administrator angemeldet sein.", 0, "Sebijks Benutzer und KennwÃ¶rter", 16); WScript.Quit(); }
+  oWs.Popup("Das Symbol von Benutzer und KennwÃ¶rter ist aus der Systemsteuerung entfernt. Die Ã„nderung tritt aber erst nach der nÃ¤chsten Anmeldung in Kraft.", 0, "Sebijks Benutzer und KennwÃ¶rter", 64);
 }
 
 //Versions-Check
@@ -75,7 +74,7 @@ function winxpchk() {
 
 }
 
-/* KeyExists überprüft, ob ein Schlüssel in der Registry existiert */
+/* KeyExists Ã¼berprÃ¼ft, ob ein SchlÃ¼ssel in der Registry existiert */
 function KeyExists(key) { 
   findstate = true;
   try {oWs.RegRead(key);}
